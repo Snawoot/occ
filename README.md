@@ -1,2 +1,3 @@
-# cas
-Generic compare-and-swap container for Go
+# occ
+
+Generic optimistic concurrent container for Go.
