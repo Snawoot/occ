@@ -20,5 +20,6 @@ func Example() {
 			})
 		}()
 	}
+	wg.Wait()
 	fmt.Printf("ctr = %d\n", *(ctr.Value()))
 }
