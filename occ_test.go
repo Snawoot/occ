@@ -38,7 +38,7 @@ func TestUpdateCollision(t *testing.T) {
 		defer close(firstDone)
 		c.Update(func(old *int) *int {
 			firstCalled++
-			firstOnce.Do(func() {close(firstAcquiredPtr)})
+			firstOnce.Do(func() { close(firstAcquiredPtr) })
 			<-secondAcquiredPtr
 			res := *old + 1
 			return &res
@@ -49,7 +49,7 @@ func TestUpdateCollision(t *testing.T) {
 		defer childWG.Done()
 		c.Update(func(old *int) *int {
 			secondCalled++
-			secondOnce.Do(func() {close(secondAcquiredPtr)})
+			secondOnce.Do(func() { close(secondAcquiredPtr) })
 			<-firstAcquiredPtr
 			<-firstDone
 			res := *old + 1

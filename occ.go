@@ -1,7 +1,7 @@
 // Package occ provides generic optimistic concurrency wrapper for values which
 // can be represented by a pointer and accessed or replaced with a new copy
 // concurrently.
-// 
+//
 // It is useful for implementation of lock-free concurrency on top of immutable
 // data structures.
 package occ
@@ -22,12 +22,12 @@ func Wrap[T any](ptr *T) *Container[T] {
 	return (*Container[T])(c)
 }
 
-// Value returns snapshot of wrapped data structure (pointer).
+// Value returns snapshot of wrapped value.
 func (c *Container[T]) Value() *T {
 	return (*atomic.Pointer[T])(c).Load()
 }
 
-// Update runs a transaction function txn which accepts old pointer value and 
+// Update runs a transaction function txn which accepts old pointer value and
 // returns new pointer value. txn function must not modify value referenced by
 // an old pointer, instead it should return a new pointer with modified copy of
 // old value.
