@@ -35,7 +35,7 @@ func (c *Container[T]) Update(txn func(oldValue *T) (newValue *T)) {
 	for {
 		oldValue := c.Value()
 		newValue := txn(oldValue)
-		if (*atomic.Pointer[T])(c).CompareAndSwap(oldValue, newValue) {
+		if oldValue == newValue || (*atomic.Pointer[T])(c).CompareAndSwap(oldValue, newValue) {
 			break
 		}
 	}
